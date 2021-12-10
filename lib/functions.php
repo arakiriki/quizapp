@@ -1,5 +1,40 @@
 <?php
 
+function loadTemplate($filename,array $assignData = []){
+    extract($assignData);
+    include __DIR__.'/../template/'.$filename.'.tpl.php';
+}
+
+function error404(){
+    // HTTPレスポンスのヘッダを404にする
+    header('HTTP/1.1 404 Not Found');
+
+    // レスポンスの種類を指定する
+    header('Content-Type: text/html; charset=UTF-8');
+
+    loadTemplate('404');
+
+    exit(0);
+}
+
+function fetchAll(){
+    // ファイルを開く
+    $handler = fopen(__DIR__.'/data.csv','r');
+    // データを取得
+    $question = [];
+    while ($row = fgetcsv($handler)){
+        if(isDataRow($row)){
+            $questions[] = $row;
+        }
+    }
+    // ファイルを閉じる
+    fclose($handler);
+    // データを返す
+    return $questions;
+    
+}
+
+
 function fetchById($id){
     // ファイルを開く
     $handler = fopen(__DIR__.'/data.csv','r');
