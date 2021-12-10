@@ -14,7 +14,7 @@
         問題は見つかりませんでした。<br><br>
 
         <div class="secition">
-            <a href="index.html">戻る</a>
+            <a href="index.php">戻る</a>
         </div>
     </div>
 </body>
